@@ -1,18 +1,15 @@
 <template>
   <main>
-    <nuxt />
+    <client-only>
+      <nuxt />
+    </client-only>
   </main>
 </template>
 
 <script>
-export default {};
+export default {
+  async created() {
+    await this.$store.dispatch("initialize")
+  }
+};
 </script>
-
-<style>
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  margin: 0;
-  padding: 0;
-}
-</style>

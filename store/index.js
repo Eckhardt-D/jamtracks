@@ -1,24 +1,26 @@
-const path = ".netlify/functions/get-deezer-flow"
-const URL =
-  process.env.NODE_ENV === "development"
-    ? `http://localhost:34567/${path}`
-    : `/${path}`
-
 export const state = () => ({
-  songs: []
+  dataLoaded: false,
+  searchLoaded: false
 })
 
 export const mutations = {
-  SET_FLOW: (state, payload) => {
-    state.songs = payload
+  SET_LOADED: (state, payload) => {
+    state.dataLoaded = payload
+  },
+  SET_SEARCH_LOADED: (state, payload) => {
+    state.searchLoaded = payload
   }
 }
 
 export const actions = {
-  async getFlow({ commit }) {
-    const response = await fetch(URL)
-    const data = await response.json()
+  async initialize({ dispatch, commit }) {
+    const lastUser = localStorage.getItem('deezer_user')
 
-    commit("SET_FLOW", data.data)
+    if(lastUser) {
+      await dispatch('user/setUser', lastUser)
+      await dispatch('songs/searchUserSongs', lastUser)
+    }
+    commit('SET_LOADED', true);
+    commit('SET_SEARCH_LOADED', true);
   }
 }

@@ -2,14 +2,14 @@ const fetch = require("node-fetch")
 
 exports.handler = function(event, _, callback) {
   const id = event.queryStringParameters.id
-  const TRACKS_URL = `https://api.deezer.com/user/${id}/tracks`
+  const USER_URL = `https://api.deezer.com/user/${id}`
 
-  getDeezerFlow(TRACKS_URL)
+  getDeezerFlow(USER_URL)
     .then(data => {
       respond(200, data)
     })
     .catch(e => {
-      respond(404, e.msg)
+      respond(404, { msg: "User not found" })
     })
 
   function respond(status, data) {
@@ -24,11 +24,11 @@ exports.handler = function(event, _, callback) {
   }
 }
 
-async function getDeezerFlow(TRACKS_URL) {
+async function getDeezerFlow(USER_URL) {
   try {
-    const response = await fetch(TRACKS_URL)
-    const tracks = await response.json()
-    return tracks
+    const response = await fetch(USER_URL)
+    const user = await response.json()
+    return user
   } catch {
     return Error("Error: cannot retrieve user data.")
   }

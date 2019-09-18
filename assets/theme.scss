@@ -1,0 +1,256 @@
+// Global resets and styles
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.site-content {
+  min-height: calc(100vh - 230px - 2em);
+  h1 {
+    margin: 0;
+    text-align: center;
+    margin-top: 1em;
+  }
+}
+
+// Header general styles
+.site-header {
+  height: 230px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(9, 9, 121, 1) 42%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  padding: 1em 0;
+  display: flex;
+  justify-content: center;
+
+  .site-header-content {
+    text-align: center;
+    align-self: center;
+
+    .site-title {
+      margin: 1em 0;
+      color: white;
+      font-size: 1.5em;
+    }
+  }
+}
+
+// Header in logged out state
+.header-id-search {
+  position: relative;
+  .loader {
+    position: absolute;
+    bottom:50%;
+    left: 50%
+  }
+  .header-input {
+    padding: 0.8em;
+    min-width: 250px;
+    font-size: 1.1em;
+  }
+
+  button {
+    padding: 0.9em 0.87em;
+    font-size: 1.1em;
+    background: none;
+    border: inset 5px solid white;
+    color: white;
+    cursor: pointer;
+  }
+
+   .header-small-text {
+    color: white;
+    font-size: 0.9em;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .header-id-search {
+    .header-input {
+      padding: 0.6em;
+      min-width: 200px;
+      font-size: 1em;
+    }
+
+    button {
+      padding: 0.7em 0.67em;
+      font-size: 1em;
+    }
+  }
+}
+
+// Header in logged in state
+.header-id-display {
+  .user-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 100%;
+  }
+
+  .user-name {
+    color: white;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 0;
+  }
+
+  .switch-text {
+    color: white;
+    font-weight: 300;
+    font-size: 0.8em;
+    cursor: pointer;
+  }
+}
+
+// Songs section styles
+.songs-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1em;
+}
+
+.song {
+  position: relative;
+  margin: 1em auto;
+  padding: 1em;
+  min-height: 100px;
+  display: flex;
+  background: #f4f4f4;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 2px 2px 6px rgba(2, 0, 36, 0.3);
+  .song-image {
+    border-radius: 3px;
+    box-shadow: 1px 1px 10px rgba(0, 212, 255, 0.5);
+  }
+  .song-details {
+    margin-left: 2.5em;
+    max-width: 350px;
+
+    h1 {
+      font-size: 1.3em;
+      text-align: left;
+      font-weight: 400;
+      letter-spacing: 1px;
+      margin: 3px 0;
+      color: #333;
+    }
+    p {
+      margin: 3px 0;
+      margin-right: 5px;
+      color: #333;
+      font-weight: 200;
+      font-size: 0.8em;
+    }
+    .song-details--extra {
+      display: flex;
+    }
+  }
+  .song-play-container {
+    position: absolute;
+    right: 2em;
+  }
+}
+
+@media screen and (max-width: 525px) {
+  .song .song-details {
+    max-width: 200px;
+  }
+}
+
+@media screen and (max-width: 445px) {
+  .site-header {
+    height: 250px;
+    & > h1 {
+      font-size: 1.5em;
+    }
+  }
+}
+
+@media screen and (max-width: 430px) {
+  .song {
+    padding: 2em 1em;
+    flex-direction: column;
+
+    & > .song-details {
+      margin: 1em 0 3em 0;
+      & > .song-details--extra {
+        justify-content: center;
+      }
+      & > h1 {
+        text-align: center;
+      }
+    }
+    & > .song-play-container {
+      bottom: 1.5em;
+      right: calc(50% - 12.5px);
+    }
+  }
+}
+
+// LOADER
+.loader,
+.loader:before,
+.loader:after {
+  background: #ffffff;
+  -webkit-animation: load1 1s infinite ease-in-out;
+  animation: load1 1s infinite ease-in-out;
+  width: 1em;
+  height: 4em;
+}
+.loader {
+  color: #ffffff;
+  text-indent: -9999em;
+  margin: 88px auto;
+  position: relative;
+  font-size: 11px;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+.loader:before,
+.loader:after {
+  position: absolute;
+  top: 0;
+  content: '';
+}
+.loader:before {
+  left: -1.5em;
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+.loader:after {
+  left: 1.5em;
+}
+@-webkit-keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
+@keyframes load1 {
+  0%,
+  80%,
+  100% {
+    box-shadow: 0 0;
+    height: 4em;
+  }
+  40% {
+    box-shadow: 0 -2em;
+    height: 5em;
+  }
+}
