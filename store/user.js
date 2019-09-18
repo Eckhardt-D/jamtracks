@@ -20,7 +20,7 @@ export const actions = {
     localStorage.clear()
   },
   async setUser({ commit }, id) {
-    const response = await fetch(URL + '/?id=' + id)
+    const response = await fetch(URL + '?id=' + id)
     const user = await response.json()
     localStorage.setItem('deezer_user', user.id)
     commit('SET_USER', user)
