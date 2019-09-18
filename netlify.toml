@@ -1,0 +1,7 @@
+[build]
+  command="yarn build"
+
+[dev]
+  functions="functions"
+  command="yarn dev"
+  port=3000
