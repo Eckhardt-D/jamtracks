@@ -1,6 +1,6 @@
 <template>
   <header class="site-header">
-    <div v-if="!loaded" class="loader">Loading...</div>
+    <div v-if="!loaded" class="loader"></div>
     <div v-if="dataLoaded && loaded" class="site-header-content">
       <h1 class="site-title">Your favourite Deezer tracks!</h1>
       <app-user-search v-if="!user" />
@@ -28,7 +28,7 @@ export default {
       return this.$store.state.dataLoaded;
     },
     loaded() {
-      return this.$store.state.searchLoaded
+      return this.$store.state.searchLoaded;
     }
   }
 };

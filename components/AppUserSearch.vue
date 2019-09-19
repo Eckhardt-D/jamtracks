@@ -1,6 +1,5 @@
 <template>
   <div class="header-id-search">
-    
     <div v-if="loaded">
       <input
         v-model="userID"
@@ -9,9 +8,10 @@
         type="text"
       />
       <button @click="updateUserInfo">Search</button>
-      <p class="header-small-text">How to find it?</p>
+      <a href="/how-to-find-it">
+        <p class="header-small-text">How to find it?</p></a
+      >
     </div>
-    
   </div>
 </template>
 
@@ -23,17 +23,17 @@ export default {
   }),
   computed: {
     loaded() {
-      return this.$store.state.searchLoaded
+      return this.$store.state.searchLoaded;
     }
   },
   methods: {
     async updateUserInfo() {
-      this.$store.commit('SET_SEARCH_LOADED', false)
+      this.$store.commit("SET_SEARCH_LOADED", false);
       if (this.userID !== "") {
-        await this.$store.dispatch('songs/searchUserSongs', this.userID)
-        await this.$store.dispatch('user/setUser', this.userID)
+        await this.$store.dispatch("songs/searchUserSongs", this.userID);
+        await this.$store.dispatch("user/setUser", this.userID);
       }
-      this.$store.commit('SET_SEARCH_LOADED', true)
+      this.$store.commit("SET_SEARCH_LOADED", true);
     }
   }
 };
