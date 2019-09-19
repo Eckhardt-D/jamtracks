@@ -1,35 +1,24 @@
-const fetch = require("node-fetch")
+const request = require("request")
+const headers = {
+  "Access-Control-Allow-Origin": "*"
+}
 
 exports.handler = function(event, _, callback) {
   const id = event.queryStringParameters.id
   const USER_URL = `https://api.deezer.com/user/${id}`
 
-  getDeezerFlow(USER_URL)
-    .then(data => {
-      respond(200, data)
-    })
-    .catch(e => {
-      respond(404, { msg: "User not found" })
-    })
-
-  function respond(status, data) {
+  request(USER_URL, (error, _, body) => {
+    if (error) {
+      return callback(null, {
+        statusCode: 404,
+        body: "Error getting user info",
+        headers
+      })
+    }
     callback(null, {
-      statusCode: status,
-      body: JSON.stringify(data),
-      headers: {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
-      }
+      statusCode: 200,
+      body,
+      headers
     })
-  }
-}
-
-async function getDeezerFlow(USER_URL) {
-  try {
-    const response = await fetch(USER_URL)
-    const user = await response.json()
-    return user
-  } catch {
-    return Error("Error: cannot retrieve user data.")
-  }
+  })
 }

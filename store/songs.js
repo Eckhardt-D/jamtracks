@@ -16,7 +16,7 @@ export const mutations = {
 
 export const actions = {
   async searchUserSongs({ commit }, payload) {
-    const response = await fetch(URL + "?id=" + payload)
+    const response = await fetch(URL + "/?id=" + payload)
     const songs = await response.json()
     commit("SET_SONGS", songs)
   }

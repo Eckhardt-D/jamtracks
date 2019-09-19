@@ -9,7 +9,9 @@
 <script>
 export default {
   async created() {
-    await this.$store.dispatch("initialize")
+    if (process.client) {
+      await this.$store.dispatch("initialize");
+    }
   }
 };
 </script>
